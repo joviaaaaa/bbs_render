@@ -89,7 +89,7 @@ $(document).on(
 $(document).on(
     'mouseenter', ".back_anker", function () {
         //試験環境
-        var article_url = "https://jobbs.herokuapp.com/thread_json/"
+        var article_url = "https://bbs-render.onrender.com/thread_json/"
         let url = location.pathname;
         let url_split = url.split('/');
         var thread = url_split[2];
