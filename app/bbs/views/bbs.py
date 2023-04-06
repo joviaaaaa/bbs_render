@@ -105,7 +105,6 @@ def create():
     session['userid'] = shorthash((request.remote_addr[1] + date.strftime('%Y%m%d')),8)
     session['name'] = name
     session['thread'] = thread_get
-    session['article_count'] = article_count_first
 
     for th in threads:
         thread_list.append(th.threadname)
@@ -134,6 +133,7 @@ def create():
         if(threadpost_error_check(thread=thread_get, article_count=article_count_first, article=article, name=name, date=date, userid=userid)):
             message = threadpost_error_log(thread=thread_get, article_count=article_count_first, article=article, name=name, date=date, userid=userid)
             session['message'] = message
+            session['article_count'] = article_count_first
             return redirect(url_for('bbs.error_direct'))
 
         db.session.add(thread_new)
