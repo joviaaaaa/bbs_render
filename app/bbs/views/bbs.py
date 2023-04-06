@@ -104,6 +104,7 @@ def create():
     session['article'] = request.form["article"]
     session['userid'] = shorthash((request.remote_addr[1] + date.strftime('%Y%m%d')),8)
     session['name'] = name
+    session['thread'] = thread_get
 
     for th in threads:
         thread_list.append(th.threadname)
@@ -280,7 +281,7 @@ def result():
     db.session.commit()
     
     if article_count == 1000:
-        max_comment = Article(1001, pub_date=date, name="ラスト", article="1000だよ", userid="admin", thread_id=thread.id)
+        max_comment = Article(1001, pub_date=date, name="ラス�?", article="1000�?�?", userid="admin", thread_id=thread.id)
         db.session.add(max_comment)
         db.session.commit()
 
@@ -485,20 +486,20 @@ def threadpost_error_log(thread, article_count, article, name, date, userid):
     message = ""
 
     if article == "":
-        message += "コメント内容が空です。何か入力して投稿してください。\n"
+        message += "コメント�??容が空です。何か入力して投稿してください�?\n"
         
     if article_count >= 1001:
-        message += "投稿内容が1000に達しています\n"
+        message += "投稿�?容�?1000に達して�?ます\n"
 
     if thread == "":
-        message += "スレッド名が空です。何か入力して投稿してください。\n"
+        message += "スレ�?ド名が空です。何か入力して投稿してください�?\n"
 
     return message; 
 
 def threadpost_name_check(thread, name):
     
     if name == "":
-        name = "名無しさん"
+        name = "名無しさ�?"
     
     return name;   
 
