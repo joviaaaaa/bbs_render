@@ -105,7 +105,8 @@ def create():
     session['userid'] = shorthash((request.remote_addr[1] + date.strftime('%Y%m%d')),8)
     session['name'] = name
     session['thread'] = thread_get
-
+    session['article_count'] = article_count
+    
     for th in threads:
         thread_list.append(th.threadname)
 
