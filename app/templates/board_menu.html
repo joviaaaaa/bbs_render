@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+      {% for category in categories: %}
+        {{ category }}
+        {% for board in boards[loop.index]: %}
+                <a href="{{ url_for('bbs.board',board_name=board.boardname) }}">{{ board.boardname }}</a>
+        {% endfor %}
+    {% endfor %}
+
+
+
+
+
+{% endblock %}
+

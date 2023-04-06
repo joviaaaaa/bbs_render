@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>書き込みました</h1>
+<br>
+<div class="thread_thread">
+    <div class="post">
+        <span class="number">{{ article_count }}</span>
+        <b>
+            <span class="name">{{ name }}</span>
+        </b>
+        <span class="date">{{ now }}</span>
+        <span class="uid"> ID:{{ userid }}</span>
+
+        <div class="message">
+            <span class="article">
+                <div id="article{{ article_count }}">{{ article }}</div>
+            </span>
+        </div>
+    </div>
+</div>
+
+{% if threadinit == 'True' %}
+<br>
+<br>
+<pre><p>スレッドが作成できました</p></pre>
+<pre><p>スレッド名　{{ thread.threadname }}</p></pre>
+{% else %}
+{% endif %}
+
+
+
+<script type="text/javascript">
+    // 一定時間経過後に指定ページにジャンプする
+    waitTimer = 5; // 何秒後に移動する
+    url = "{{ url_for('bbs.thread',thread_get=thread.threadname,range_nmb="l50") }}"; // 移動するアドレス
+    function jumpPage() {
+        location.href = url;
+    }
+    setTimeout("jumpPage()", waitTimer * 1000)
+    //-->
+</script>
+
+<br>
+5秒後にスレッドへ移動します
+<br>
+
+
+<form action="/" method="get">
+    <button type="submit">戻る</button>
+</form>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div id="wrapper">
+        <div class="left-column">
+            <a href="/board_menu">板一覧</a>
+            <br>
+            {% set ns = namespace(cnt = 1) %}
+            {% for category in categories: %}
+                {{ category }}
+                <br>
+                {% for board in boards[ns.cnt]: %}
+                    <a href="{{ url_for('bbs.board',board_name=board.boardname) }}">{{ board.boardname }}</a>
+                    <br>
+                {% endfor %}
+                {% set ns.cnt = ns.cnt + 1 %}
+            {% endfor %}            
+        </div>
+        
+        <div class="right-column">
+            <span class = "foo">
+            
+            <h1>5.2ちゃんねる</h1>
+            
+            <p>
+            <a href="/">TOP</a>
+               - 
+            <a href="dummy.html">GUIDE(FAQ)</a>
+            </p>
+
+            <p>
+            「ハッキング」から「今晩のおかず」まで手広くカバーする巨大掲示板群
+            <br>
+            <strong style="font-size: 1.25em;">『５.２ちゃんねる』</strong>
+            へようこそ!
+            <br>
+            <strong style="font-size: 1.25em;">『５.２ちゃんねる』</strong>
+            って何?という方は
+            <a href="/">インフォメーション</a>
+            をご覧ください。
+            </p>
+    
+            <p>
+            <a href="/">浪人を買います</a>
+            </p>
+
+            <form action="/search_result" method="get">
+                <label for="search">スレッド検索</label>
+                <input type="text" name="search">
+                <button type="submit">検索</button>
+            </form>
+
+            </span>
+
+        <h2>スレッド一覧</h2>
+            {% for thread in threads: %}
+            <a href="{{ url_for('bbs.thread_defo',thread_get=thread.threadname) }}">{{ thread.threadname }}</a>
+            <br>
+            {% endfor %}
+      </div>
+  </div>
+
+{% endblock %}
+

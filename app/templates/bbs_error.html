@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>エラー</h1>
+<br>
+<div class="thread_thread">
+    <div class="post">
+        <span class="number">{{ article_count }}</span>
+        <b>
+            <span class="name">{{ name }}</span>
+        </b>
+        <span class="date">{{ now }}</span>
+        <span class="uid"> ID:{{ userid }}</span>
+
+        <div class="message">
+            <span class="article">
+                <div id="article{{ article_count }}">{{ article }}</div>
+            </span>
+        </div>
+    </div>
+
+    <pre><p>{{ message }}</p></pre>
+
+    <script type="text/javascript">
+
+        // 一定時間経過後に指定ページにジャンプする
+        waitTimer = 1000; // 何秒後に移動する
+
+        url = "{{ url_for('bbs.thread',thread_get=thread.threadname,range_nmb="l50") }}"; // 移動するアドレス
+
+        if ("{{ thread.threadname }}" === "") {
+            url = "{{ url_for('bbs.main') }}"; // 移動するアドレス
+        }
+
+        function jumpPage() {
+            location.href = url;
+        }
+        setTimeout("jumpPage()", waitTimer * 1000)
+    //-->
+    </script>
+
+    {% if not thread.threadname %}
+    <br>
+    1000秒後にメインページへ移動します
+    <br>
+
+    {% else %}
+    <br>
+    1000秒後にスレッドへ移動します
+    <br>
+
+    {% endif %}
+
+
+    {% if not thread.threadname %}
+    {% else %}
+    <form action="/thread/{{ thread.threadname }}/l50" method="get">
+        <button type="submit">スレへ戻る</button>
+    </form>
+    {% endif %}
+
+
+    <form action="/" method="get">
+        <button type="submit">HPに戻る</button>
+    </form>
+
+    <button type="button" onclick="history.back()">前のページに戻る</button>
+
+    {% endblock %}

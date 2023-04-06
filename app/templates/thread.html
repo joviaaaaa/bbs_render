@@ -1,0 +1,102 @@
+{% extends "layout.html" %}
+{% block content %}
+<script src=" {{url_for('static', filename='js/article.js')}} "></script>
+
+<h1>掲示板</h1>
+<div class="THREAD_ALL">
+    <h1 class="TITLE">
+        {{ thread }}
+    </h1>
+    
+    <div class="pagestats">
+        <ul class="menujust">
+            <li class="metastats">
+                {{ thread }} コメント
+            </li>
+        </ul>
+    </div>
+
+    <div class="topnav">
+        <ul class="menujst">
+            <li class="menu_topnav">
+                <a class="menuitem" href="{{ url_for('bbs.thread_defo',thread_get=thread) }}">全部</a>
+            <li class="menu_topnav">
+                <a class="menuitem" href="{{ url_for('bbs.thread',thread_get=thread,range_nmb="1-100") }}">1-100</a>
+            <li class="menu_topnav">
+                <a class="menuitem" href="{{ url_for('bbs.thread',thread_get=thread,range_nmb="l50") }}">最新50</a>
+        </ul>
+    </div>
+    
+    <div class="topnav">
+        <ul class="menujst">
+            <li class="menu_topnav">
+                <a class="menuitem" href="{{ url_for('bbs.board',board_name=board.boardname) }}">掲示板に戻る</a>
+        </ul>
+    </div>
+    <div class="thread_thread">
+    {% for article in articles: %} 
+        <div class="post">
+            <span class="number">{{ article.article_count }}</span>
+            </a>
+            <b>
+                <span class="name">{{ article.name }}</span>
+            </b>
+            <span class="date">{{ article.pub_date }}</span>
+            <span class="uid">   ID:{{ article.userid }}</span>
+
+        <div class="message">
+            <span class="article">
+                <div id="article{{ article.article_count }}"></div>
+                <script type="text/javascript">
+                    var article = `{{ article.article }}`;
+                    var article_count = `{{ article.article_count }}`
+                    var thread = `{{ thread }}`; 
+                    res_read();
+                </script>
+            </span>
+        </div>
+    </div>    
+    <br>
+    {% endfor %}
+</div>
+    
+<div class="topnav">
+    <ul class="menujst">
+        <li class="menu_topnav">
+            <a class="menuitem" href="{{ url_for('bbs.thread_defo',thread_get=thread) }}">全部</a>
+        <li class="menu_topnav">
+            <a class="menuitem" href="{{ url_for('bbs.thread',thread_get=thread,range_nmb="1-100") }}">1-100</a>
+        <li class="menu_topnav">
+            <a class="menuitem" href="{{ url_for('bbs.thread',thread_get=thread,range_nmb="l50") }}">最新50</a>
+    </ul>
+</div>
+
+<div class="topnav">
+    <ul class="menujst">
+        <li class="menu_topnav">
+            <a class="menuitem" href="{{ url_for('bbs.board',board_name=board.boardname) }}">掲示板に戻る</a>
+    </ul>
+</div>
+
+<div class="form_dayo">
+    <span style="font-weight:bolder;">レスを投稿する</span>
+    <hr>
+    
+    <form action="/result" method="post">
+        <input class="form_post" size="70" name="name" placeholder="名前(省略可)">
+        <br>
+        <input class="form_post" size="70" name="name" placeholder="メールアドレス(省略可)">
+        <br>
+        <input type="hidden" name="thread" value="{{ thread }}">
+        <textarea name="article" rows="5" cols="70" wrap="off" placeholder="コメント内容"></textarea>
+        <br>
+        <input type="submit" value="SUBMIT" name="submit">
+    </form>
+</div>
+
+<form action="/" method="get">
+    <button type="submit">戻る</button>
+</form>
+
+<div class="anker_tooltip"></div>
+{% endblock %}

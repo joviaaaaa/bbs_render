@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>検索結果</h1> 
+
+       {% if search %}
+          {% for f in search: %}
+            <a href="{{ url_for('bbs.thread_defo',thread_get=f) }}">{{ f }}</a>
+            <br>
+         {% endfor %}
+       {% else %}
+         <p>該当する検索結果は見つかりませんでした</p>
+       {% endif %}
+{% endblock %}
+
+

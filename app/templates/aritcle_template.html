@@ -1,0 +1,26 @@
+        <div class="post">
+            <a name="article"{{ article.article_count }}>
+            <span class="number">{{ article.article_count }}</span>
+            </a>
+            <b>
+                <span class="name">{{ article.name }}</span>
+            </b>
+            <span class="date">{{ article.pub_date }}</span>
+            <span class="uid">   ID:{{ article.userid }}</span>
+
+        <div class="message">
+            <span class="article">
+                <script src=" {{url_for('static', filename='js/article.js')}} "></script>
+                <div id="article{{ article.article_count }}"></div>
+                <script type="text/javascript">
+                    var article = `{{ article.article }}`;
+                    var article_count = `{{ article.article_count }}`
+                    var thread = `{{ thread }}`;
+                    res_read(article);
+                </script>
+            </span>
+        </div>
+    </div>
+    <br>
+    {% block content %}
+    {% endblock %}

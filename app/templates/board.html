@@ -1,0 +1,184 @@
+{% extends "layout.html" %}
+{% block content %}
+<script src=" {{url_for('static', filename='js/article.js')}} "></script>
+
+    <h1>5.2ちゃんねる</h1>
+
+        <div class="HEADER_AREA">
+            <h2>
+               <span class="board_top">{{ boards.boardname }}</span>
+            </h2>
+            <div class="board_reader">
+            </div>
+
+            <hr size="10" color="white">
+
+            <div class="SPARROW">
+            <h3 style="margin: 0; padding: 0; text-align: left;">この板の投稿数順位</h3>
+            <p style="margin: 0px; padding: 0px; font-size: 0.75em; color: rgb(51, 102, 102); text-align: left; --darkreader-inline-color:#96caca;" data-darkreader-inline-color="">最終更新日時：????/??/?? ??:??:??</p>
+            <p style="margin: 0; padding: 0; white-space: nowrap; text-align: left;">本日の総投稿数：
+                <span style="color: rgb(204, 51, 51); --darkreader-inline-color:#d14747;" data-darkreader-inline-color> ?</span>
+                  順位：
+                <span style="color: rgb(204, 51, 51); --darkreader-inline-color:#d14747;" data-darkreader-inline-color> ???/?,???</span>
+            </p>
+            <p style="margin: 0; padding: 0; white-space: nowrap; text-align: left;">分あたり投稿数：
+                <span style="color: rgb(204, 51, 51); --darkreader-inline-color:#d14747;" data-darkreader-inline-color> ?</span>
+                  順位：
+                <span style="color: rgb(204, 51, 51); --darkreader-inline-color:#d14747;" data-darkreader-inline-color> ???/?,???</span>
+            </p>
+            <p style="margin: 0; padding: 0; text-align: right;"><a href="//stat.5ch.net/SPARROW/">SPARROW</a></p>
+            </div>
+            
+            
+            <h3><span class="common">ご案内</span></h3>
+            <p style="margin: 0; padding: 0 0.5em 0.5em 0.5em; text-align: left; font-size: 0.75em; font-weight: bold;">
+                <a href="dummy.html">書き込む前に読んでね</a><br>
+                <a href="dummy.html">５.２ちゃんねるガイド</a><br>
+                <a href="#menu">この板の主なスレッド一覧</a><br>
+                <a href="#0">１番目のスレッド</a>
+                </p>
+        </div>
+    <div class="THREAD_MENU">
+        <h3>
+            <a name="menu"></a>
+            <span class="common">この板の主なスレッド</span>
+        </h3>
+
+        <p style="margin: 0; padding: 0 0 0.5em 0.5em; font-size: 0.75em;">
+            <b>
+                <a href="dummy.html">スレッド一覧はこちら</a>
+                <a href="dummy.html">過去ログ一覧はこちら</a>
+            </b>
+        </p>
+        
+        <div class="THREAD_LIST">
+            {% set ns = namespace(cnt = 1) %}
+            {% for thread in threads: %}
+                <a href="{{ url_for('bbs.thread_defo',thread_get=thread) }}">{{ ns.cnt }}: </a>
+                <a href="#{{ ns.cnt - 1 }}">{{ thread }}</a>
+                <br>
+                {% set ns.cnt = ns.cnt + 1 %}
+            {% endfor %}
+        </div>
+
+        <p style="margin: 0; padding: 0.5em 0 0.5em 0.5em; font-size: 0.75em;">
+            <b>
+                <a href="#new_thread">新規スレッド作成はこちら</a>
+            </b>
+        </p>
+        <p style="margin: 0; padding: 0 0 0.5em 0.5em; font-size: 0.75em;">
+            <b>
+                <a href="subback.html">スレッド全一覧はこちら</a> 
+                <a href="kako/kako0000.html">過去ログ一覧はこちら</a>
+            </b>
+        </p>
+    </div>
+    
+    {% set ns = namespace(cnt = 1) %}
+    {% for thread in threads: %}
+
+    <div class="THREAD_CONTENT">
+        <div class="THREAD_IN">
+            <a href="#menu">目</a>
+            <a href="#{{ next_jp[ns.cnt - 1] }}">次</a>
+            <a href="#{{ prev_jp[ns.cnt - 1] }}">前</a>
+            <a href="#new_threa">新</a>
+        </div>
+        
+        <div class="RES_NUMBER">
+            <span class="RES">
+                {{ ns.cnt }}：{{ a_to[ns.cnt - 1] }}
+                <span style="font-size: 0.75em;">レス</span>
+            </span>
+
+            <span>
+                CP:??
+            </span>
+        </div>
+
+        <h3 class="thread_title" style="margin: 0; padding: 0 2.0em 0 3.0em; text-indent: -4.0em;">
+            <span style="padding: 0px 0px 1.5em 1em; color: rgb(255, 0, 0); font-size: 1.0em; --darkreader-inline-color:#ff1a1a;">{{ thread }}</span>
+            <a name="{{ ns.cnt - 1 }}"></a>
+        </h3>
+        
+        {% for article in articles[ns.cnt]: %}
+
+        <dl class="thread" style="margin-top: 0px;">
+            <dt>{{ article.article_count }}  名前：
+                <span>
+                    <b>{{ article.name }}</b>
+                </span>
+
+                {{ article.pub_date }}
+
+                <small></small>
+
+               ID：{{ article.userid }}
+            </dt>
+
+            <dd style="margin-bottom: 2.0em; font-size: 1.00em; margin-left:40px; font-weight: normal;">
+                <div id="article{{ article.article_count }}"></div>
+                    <script type="text/javascript">
+                        var article = `{{ article.article }}`;
+                        var article_count = `{{ article.article_count }}`
+                        var thread = `{{ thread }}`; 
+                        res_read();
+                    </script>
+            </dd>
+        </dl>
+        {% endfor %}
+        {% set ns.cnt = ns.cnt + 1 %}
+        
+        <hr size="10" color="white">
+        <p style="margin: 0; padding: 0.5em;">
+        <a href="{{ url_for('bbs.thread_defo',thread_get=thread) }}">全部読む</a>    
+        <a href="{{ url_for('bbs.thread',thread_get=thread,range_nmb="l50") }}">最新50</a>    
+        <a href="{{ url_for('bbs.thread',thread_get=thread,range_nmb="1-100") }}">1-100</a>    
+        <a href="#menu">この板の主なスレッド一覧</a>
+        <a href="{{ url_for('bbs.board',board_name=boards.boardname) }}">リロード</a>
+        </p>
+        <hr size="10" color="white">
+        
+        <h3>
+            <span class="common">書き込み欄</span>
+        <h3>
+        
+        <form action="/result"  method="post">
+            <p style="margin: 0 0 0 2em; font-size: 0.75em;">
+                <input type="hidden" name="thread" value="{{ thread }}">
+                <button type="submit">送信する</button> 
+                <br>
+                名前：<input type="text" name="name" style="width: 16em;">
+                E-mail：<input type="text" name="mail" style="width: 16em;">
+                <br>
+                <textarea style="min-width: 40em; height: 10.0em; word-wrap: break-word;" 
+                          name="article" rows="4" cols="12"></textarea>
+                <br>
+            </p>
+        </form>
+    </div> 
+    {% endfor %}
+   <div class="NEW_THREAD"> 
+      <form action="/create" method="post">
+          <a name="new_thread"></a>
+          <h3>
+              <span class="common">新規スレッド作成</span>
+          </h3>
+          
+          <p style="margin: 0 0 0 2em; font-size: 0.75em;">
+              <input type="submit" value="新規スレッド作成" name="submit">
+              <br>
+              スレッドタイトル
+              <input type="text" name="thread" style="width: 24em;">
+              <input type="hidden" name="board_id" value="{{ boards.id }}">
+              <br>
+              名前：<input type="text" name="name" style="width: 16em;">
+              E-mail：<input type="text" name="mail" style="width: 16em;">
+              <br>
+              <textarea style="min-width: 40em; height: 10.0em; word-wrap: break-word;" 
+                        name="article" rows="4" cols="12"></textarea>
+          </p>
+      </form>
+   <div>
+{% endblock %}
+

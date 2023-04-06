@@ -1,0 +1,89 @@
+.HEADER_AREA{
+   z-index: 1;
+   width: 93%;
+   margin: 0.5em auto 0.75em;
+   padding: 0.75em;
+   border: 1px solid rgb(51, 51, 51);
+   color: rgb(51, 51, 51);
+   border-radius: 0.75em;
+   background: rgb(204, 255, 204);
+   font-size: 1em; --darkreader-inline-border-top:#7b7265;
+   --darkreader-inline-border-right:#7b7265;
+   --darkreader-inline-border-bottom:#7b7265;
+   --darkreader-inline-border-left:#7b7265;
+   --darkreader-inline-color:#c8c3bc;
+   --darkreader-inline-bgimage: initial;
+   --darkreader-inline-bgcolor:#145200;
+}
+
+.HEADER_AREA h2{
+    margin: 0 0 0.5em 0; padding: 0.25em 0; text-align: left;
+}
+
+.HEADER_AREA .H_2 {
+    padding: 0.25em 0.5em;
+    border-radius: 0.25em;
+    background: rgb(51, 153, 255);
+    color: rgb(255, 255, 255);
+    font-size: 1.25em; --darkreader-inline-bgimage: initial; --darkreader-inline-bgcolor:#0057ad; --darkreader-inline-color:#e8e6e3;
+}
+
+.HEADER_AREA .board_reader{
+    margin: 0 1.0em 1.0em 1.0em; padding: 0.5em; color: #333; background: #EFE; border-radius: 0.25em / 0.25em; font-size: 1.00em; height: 15em; overflow-y: scroll;
+}
+
+.HEADER_AREA .SPARROW {
+float: right;
+left: auto;
+right: 2em;
+top: auto;
+bottom: 0px;
+z-index: 1;
+width: 25em;
+margin: 1em 1em 0px 0px;
+padding: 1em;
+border: 1px solid rgb(51, 51, 51);
+color: rgb(51, 51, 51);
+border-radius: 1em;
+background: rgb(238, 238, 238);
+font-size: 0.5em;
+--darkreader-inline-border-top:#7b7265;
+--darkreader-inline-border-right:#7b7265;
+--darkreader-inline-border-bottom:#7b7265;
+--darkreader-inline-border-left:#7b7265;
+--darkreader-inline-color:#c8c3bc;
+--darkreader-inline-bgimage: initial;
+--darkreader-inline-bgcolor:#222426;
+}
+
+.HEADER_AREA .common {
+ padding: 0.5em; border-radius: 0.50em / 0.50em; background: #39F; color: #FFF; font-size: 1.00em; }
+
+
+.SPARROW h3{
+margin: 0px; padding: 0px; font-size: 0.75em; color: rgb(51, 102, 102); text-align: left; --darkreader-inline-color:#96caca;
+}
+
+
+.foo{
+    text-align:center;
+}
+
+.foo a{
+    text-decoration: underline;
+}
+
+#wrapper {
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+}
+
+.left-column {
+    width: 10%;
+}
+
+.right-column {
+    width: 90%;
+}

@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div id="wrapper">
+        <div class="left-column">
+            <a href="/board_menu">板一覧</a>
+            <br>
+            {% set ns = namespace(cnt = 1) %}
+            {% for category in categories: %}
+                {{ category }}
+                {% for board in boards[ns.cnt]: %}
+                    <form action="/board" name="{{ board.boardname }}" method="post">
+                    <input type="hidden" name="board" value="{{ board.id }}">
+                    <button type="submit">{{ board.boardname }}</button>
+                    <a href="javascript:{{ board.boardname }}.submit()">{{ board.boardname }}</a>
+                    </form>
+                {% endfor %}
+                {% set ns.cnt = ns.cnt + 1 %}
+            {% endfor %}            
+        </div>
+        
+        <div class="right-column">
+            <span class = "foo">
+            
+            <h1>5ちゃんねる</h1>
+            
+            <p>
+            <a href="/">TOP</a>
+               - 
+            <a href="/">GUIDE(FAQ)</a>
+            </p>
+
+            <p>
+            「ハッキング」から「今晩のおかず」まで手広くカバーする巨大掲示板群
+            <br>
+            <strong style="font-size: 1.25em;">『５ちゃんねる』</strong>
+            へようこそ!
+            <br>
+            <strong style="font-size: 1.25em;">『５ちゃんねる』</strong>
+            って何?という方は
+            <a href="/">インフォメーション</a>
+            をご覧ください。
+            </p>
+    
+            <p>
+            <a href="/">浪人を買います</a>
+            </p>
+
+            <form action="/search_result" method="get">
+                <label for="search">スレッド検索</label>
+                <input type="text" name="search">
+                <button type="submit">検索</button>
+            </form>
+
+            </span>
+
+        <h2>スレッド一覧</h2>
+            {% for thread in threads: %}
+                <form action="/thread" method="post">
+                  <input type="hidden" name="thread" value="{{ thread.threadname }}">
+                  <button type="submit">{{ thread.threadname }}</button>
+            </form>
+            {% endfor %}
+      </div>
+  </div>
+
+{% endblock %}
+
